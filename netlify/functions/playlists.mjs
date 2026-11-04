@@ -1,11 +1,13 @@
 const COLLECTIONS = [
   { id: 'journey', channel: 'journey', name: 'Journey With', playlistId: 'PLbHNC0p9g71g' },
-  { id: 'taste-mthaux', channel: 'taste', name: 'Taste Buds — Mthaux', playlistId: 'PLHqwG7251C1Glekc2bvkd3TAaD-yn4zUu' },
-  { id: 'taste-network', channel: 'taste', name: 'Taste Buds — Network Buds', playlistId: 'PLlkwifbogSFxh6N8B0wCClpKHUHnx734I' },
+  { id: 'taste-mthaux', channel: 'taste', name: 'Taste Buds – Mthaux', playlistId: 'PLHqwG7251C1Glekc2bvkd3TAaD-yn4zUu' },
+  { id: 'taste-network', channel: 'taste', name: 'Taste Buds – Network Buds', playlistId: 'PLlkwifbogSFxh6N8B0wCClpKHUHnx734I' },
   { id: 'run', channel: 'run', name: 'On The Run', playlistId: 'PLHqwG7251C1GkpdxETmPsCAc6F3FYWCKY' },
   { id: 'originals-a', channel: 'originals', name: 'A New Chapter', playlistId: 'PLQ3_rvkGAsZM' },
-  { id: 'originals-b', channel: 'originals', name: 'More AUX Originals', playlistId: 'PLExF2bTHY_Xk' }
+  { id: 'originals-b', channel: 'originals', name: 'More AUX Originals', playlistId: 'PLExF2bTHY_Xk' },
+  { id: 'special', channel: 'special', name: 'A Special Journey', playlistId: 'PLHqwG7251C1HTrP9sTu6Kdts0QaPeREZX' }
 ];
+
 
 const headers = {
   'Content-Type': 'application/json; charset=utf-8',
