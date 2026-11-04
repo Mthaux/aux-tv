@@ -1,7 +1,16 @@
 (function(){
   const root=document.getElementById('aux-tv-root'); if(!root || root.dataset.auxLoaded) return; root.dataset.auxLoaded='1';
   const endpoint=root.dataset.api || '/api/playlists';
-  const channels=[{id:'journey',number:'01',title:'Journey With',desc:'Cars, culture and the open road'},{id:'taste',number:'02',title:'Taste Buds',desc:'Food, flavours and unforgettable bites'},{id:'run',number:'03',title:'On The Run',desc:'Movement, motivation and athletics'},{id:'originals',number:'04',title:'AUX Originals',desc:'Original stories and more'}];
+
+const channels=[
+  {id:'journey',number:'01',title:'Journey With',desc:'Cars, culture and the open road'},
+  {id:'taste',number:'02',title:'Taste Buds',desc:'Food, flavours and unforgettable bites'},
+  {id:'run',number:'03',title:'On The Run',desc:'Movement, motivation and athletics'},
+  {id:'originals',number:'04',title:'AUX Originals',desc:'Original stories and more'},
+  {id:'special',number:'05',title:'A Special Journey',desc:'Extraordinary stories and inspiring journeys'},
+  {id:'radio',number:'06',title:'Radio AUX',desc:'Conversations, music and radio culture'}
+];
+
   const fallback=[{id:'originals-a',channel:'originals',name:'A New Chapter',videos:[{id:'YnASfu7yARo',title:'A New Chapter — Featured Episode',thumbnail:'https://i.ytimg.com/vi/YnASfu7yARo/hqdefault.jpg'}]},{id:'journey',channel:'journey',name:'Journey With',videos:[{id:'ZJFDZWjqbJE',title:'Journey With — Featured Episode',thumbnail:'https://i.ytimg.com/vi/ZJFDZWjqbJE/hqdefault.jpg'}]}];
   let collections=fallback, active='journey', chosen=null;
   const escape=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
