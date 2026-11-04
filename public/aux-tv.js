@@ -20,7 +20,12 @@ const channels=[
 }`;
   const style=document.createElement('style');style.textContent=css+glassCss;root.appendChild(style);
   const ui=document.createElement('div');root.appendChild(ui);
-  const allFor=()=>collections.filter(c=>c.channel===active);
+
+const allFor = () => collections.filter(c =>
+  String(c.channel || '').trim().toLowerCase() ===
+  String(active || '').trim().toLowerCase()
+);
+
 const sortedVideos = () => allFor()
   .flatMap(c => c.videos || [])
   .sort((a, b) =>
