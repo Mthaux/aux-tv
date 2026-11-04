@@ -38,5 +38,5 @@ const current = () =>
   }
   render();
   fetch(endpoint,{headers:{'Accept':'application/json'}}).then(async r=>{const data=await r.json();if(!r.ok)throw new Error(data.error||`HTTP ${r.status}`);if(!Array.isArray(data.collections))throw new Error('Invalid API response');
-collections=data.collections.filter(c=>c && typeof c==='object').map(c=>c.id==='originals-a''&&(!c.videos||!c.videos.length)?{...c,name:'A New Chapter',videos:[{id:'YnASfu7yARo',title:'A New Chapter — Featured Episode',thumbnail:'https://i.ytimg.com/vi/YnASfu7yARo/hqdefault.jpg'}]}:c);render();const s=ui.querySelector('#aux-sync-status');if(s)s.textContent='Playlists synced';}).catch(err=>{const s=ui.querySelector('#aux-sync-status');if(s)s.textContent='Sync unavailable · showing featured episode';console.warn('AUX TV:',err.message);});
+collections=data.collections.filter(c=>c && typeof c==='object').map(c=>c.id==='originals-a'&&(!c.videos||!c.videos.length)?{...c,name:'A New Chapter',videos:[{id:'YnASfu7yARo',title:'A New Chapter — Featured Episode',thumbnail:'https://i.ytimg.com/vi/YnASfu7yARo/hqdefault.jpg'}]}:c);render();const s=ui.querySelector('#aux-sync-status');if(s)s.textContent='Playlists synced';}).catch(err=>{const s=ui.querySelector('#aux-sync-status');if(s)s.textContent='Sync unavailable · showing featured episode';console.warn('AUX TV:',err.message);});
 })();
