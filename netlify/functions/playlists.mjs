@@ -90,9 +90,12 @@ async function loadCollection(collection, key) {
     }, key);
 
     for (const video of data.items || []) {
-      const regularVideo =
-        video.snippet?.liveBroadcastContent === 'none' &&
-        !video.liveStreamingDetails;
+     
+const regularVideo =
+  video.snippet?.liveBroadcastContent !== 'upcoming' &&
+  video.snippet?.liveBroadcastContent !== 'live' &&
+  (!video.liveStreamingDetails ||
+    Boolean(video.liveStreamingDetails.actualEndTime));
 
       const embeddable = video.status?.embeddable === true;
       const publicVideo = video.status?.privacyStatus === 'public';
