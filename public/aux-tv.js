@@ -10,7 +10,15 @@
   const style=document.createElement('style');style.textContent=css+glassCss;root.appendChild(style);
   const ui=document.createElement('div');root.appendChild(ui);
   const allFor=()=>collections.filter(c=>c.channel===active);
-  const current=()=>allFor().flatMap(c=>c.videos||[]).find(v=>v.id===chosen)||allFor().flatMap(c=>c.videos||[])[0];
+const sortedVideos = () => allFor()
+  .flatMap(c => c.videos || [])
+  .sort((a, b) =>
+    (Date.parse(b.publishedAt || '') || 0) -
+    (Date.parse(a.publishedAt || '') || 0)
+  );
+const current = () =>
+  sortedVideos().find(v => v.id === chosen) ||
+  sortedVideos()[0];
   function render(){const ch=channels.find(c=>c.id===active), video=current();
     ui.innerHTML=`<div class="aux-shell"><header class="aux-header"><div><div class="aux-brand">AUX <span>TV</span></div><div class="aux-tag">Online, On Demand</div></div><div class="aux-status" id="aux-sync-status">YouTube episode library</div></header><div class="aux-player" id="aux-player">${video?`<iframe title="AUX TV video player" src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.id)}?rel=0&playsinline=1" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" allowfullscreen loading="lazy"></iframe>`:`<div class="aux-placeholder"><strong>No episodes available yet</strong><span>Choose another channel or check again later.</span></div>`}</div><div class="aux-info"><div><div class="aux-tag">Now showing · CH ${ch.number}</div><h1>${escape(video?.title||ch.title)}</h1><p>${escape(ch.desc)}</p></div><button type="button" class="aux-full" id="aux-full">⛶ Full screen</button></div><h2>Explore channels</h2><div class="aux-channels">${channels.map(c=>`<button type="button" class="aux-channel" data-channel="${c.id}" aria-pressed="${c.id===active}"><span class="aux-num">CH ${c.number}</span><b>${escape(c.title)}</b><small>${escape(c.desc)}</small></button>`).join('')}</div><h2>Browse episodes</h2>${allFor().map(c=>`<section class="aux-collection"><h3>${escape(c.name)}</h3>${c.warning?`<p class="aux-warning">${escape(c.warning)}</p>`:''}${c.videos?.length?`<div class="aux-strip">${c.videos.map(v=>`<button type="button" class="aux-episode" data-video="${escape(v.id)}" aria-pressed="${v.id===video?.id}"><img src="${escape(v.thumbnail||`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`)}" alt="" loading="lazy"><strong>${escape(v.title)}</strong></button>`).join('')}</div>`:`<div class="aux-empty">No public episodes found in this playlist.</div>`}</section>`).join('')}<div class="aux-footer">© ${new Date().getFullYear()} AUX TV · Online, On Demand</div></div>`;
     ui.querySelectorAll('[data-channel]').forEach(b=>b.addEventListener('click',()=>{active=b.dataset.channel;chosen=null;render();}));
